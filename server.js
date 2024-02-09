@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI)
         // listen for requests
         app.listen(process.env.PORT, ()=>{
             logBackendFolder()
-            watchUploadsFolder()
+            //watchUploadsFolder()
             console.log('Listening on port' , process.env.PORT)
         })
 
