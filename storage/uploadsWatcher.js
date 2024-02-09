@@ -1,7 +1,7 @@
+require('dotenv').config();
 const fs = require('fs');
 
-const folderPath = './storage/uploads';
-
+let folderPath = process.env.UPLOADS_PATH || './storage/uploads';
     const watchUploadsFolder = () => {
         function logFolderContents() {
             fs.readdir(folderPath, (err, files) => {
