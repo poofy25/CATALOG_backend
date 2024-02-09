@@ -2,6 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 
 let folderPath = process.env.UPLOADS_PATH || './storage/uploads';
+console.log(process.env.UPLOADS_PATH);
     const watchUploadsFolder = () => {
         function logFolderContents() {
             fs.readdir(folderPath, (err, files) => {
@@ -27,10 +28,5 @@ let folderPath = process.env.UPLOADS_PATH || './storage/uploads';
         logFolderContents();
 
     }
-
-
-
-
-
 
 module.exports = watchUploadsFolder
