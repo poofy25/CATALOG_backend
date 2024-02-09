@@ -3,6 +3,7 @@ require('dotenv').config()
 const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
+const watchUploadsFolder = require('./storage/uploadsWatcher')
 
 // routes
 const adminRoutes = require('./routes/admin')
@@ -25,6 +26,7 @@ mongoose.connect(process.env.MONGO_URI)
 
         // listen for requests
         app.listen(process.env.PORT, ()=>{
+            watchUploadsFolder()
             console.log('Listening on port' , process.env.PORT)
         })
 
