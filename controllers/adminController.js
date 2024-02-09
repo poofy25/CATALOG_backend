@@ -38,6 +38,7 @@ const signupUser = async (req, res) => {
 }
 
 const uploadItem = async (req, res) => {
+  console.log('Image uploaded successfully')
   res.status(200).json({ message: 'Image uploaded successfully' });
 }
 
