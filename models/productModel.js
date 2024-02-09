@@ -27,7 +27,7 @@ const productSchema = new Schema ({
     imagePath:{
         type:String,
         required:true,
-        unique:true
+        // unique:true
     }
 
 },{timestamps:true})
