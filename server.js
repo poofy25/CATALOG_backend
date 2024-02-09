@@ -8,6 +8,7 @@ const logBackendFolder = require('./logFolderPath')
 
 // routes
 const adminRoutes = require('./routes/admin')
+const productRoutes = require('./routes/product')
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use((req, res , next)=>{
 
 // routes
 app.use('/api/admin' , adminRoutes)
+app.use('/api/catalog' , productRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
@@ -27,8 +29,7 @@ mongoose.connect(process.env.MONGO_URI)
 
         // listen for requests
         app.listen(process.env.PORT, ()=>{
-            logBackendFolder()
-            watchUploadsFolder()
+            //watchUploadsFolder()
             console.log('Listening on port' , process.env.PORT)
         })
 

@@ -1,10 +1,9 @@
-const Admin = require('../models/adminModel')
+require('dotenv').config();
 const jwt = require('jsonwebtoken')
 
-require('dotenv').config();
-const fs = require('fs');
+const Admin = require('../models/adminModel')
+const Product = require('../models/productModel')
 
-let folderPath = process.env.UPLOADS_PATH || './storage/uploads';
 
 const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
@@ -42,29 +41,26 @@ const signupUser = async (req, res) => {
   }
 }
 
-function logFolderContents() {
-  fs.readdir(folderPath, (err, files) => {
-      if (err) {
-          console.error('Error reading folder:', err);
-          return;
-      }
-      console.log('Folder contents:', files);
-  });
-}
+
 
 const uploadItem = async (req, res) => {
-  console.log('Image uploaded successfully')
-   function logFolderContents() {
-    fs.readdir(folderPath, (err, files) => {
-        if (err) {
-            console.error('Error reading folder:', err);
-            return;
-        }
-        console.log('Folder contents:', files);
-        res.status(200).json({ message: 'Image uploaded successfully', images: files });
-    });
+  
+  const imageData = req.file
+
+  const { name, description, category, weight, price } = req.body
+  const imagePath = ('./' + imageData.path.replace('\\','/')).replace(`\\`,'/')
+  console.log(req.body)
+
+
+  try {
+    const product = await Product.createNew({name, description, category, weight, price , imagePath})
+    res.status(200).json({ message: 'Image uploaded successfully', product:{...product} });
+  } catch (error) {
+    res.status(400).json({error: error.message})
   }
-  logFolderContents()
+
+  
+ 
 }
 
 
